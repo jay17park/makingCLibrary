@@ -1,0 +1,51 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "Echo",
+        "type": "shell",
+        "command" :"echo",
+        "args": [
+            "${workspaceFolder}"
+        ]
+
+    },
+        {
+            "label": "Making .a File Object",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-fPIC",
+                "-c",
+                "LibApi.cpp"
+            ]
+        },
+        {
+            "label": "Build .a File Library",
+            "type": "shell",
+            "command": "ar",
+            "args": [
+                "rc",
+                "libLibApi.a",
+                "LibApi.o"
+            ]
+        },
+        {
+            "label": "Making .so File Object",
+            "type": "shell",
+            "command" : "g++",
+            "args": [
+                    "-fPIC", "-c", "DllApi.cpp"
+            ]
+        },
+        {
+            "label": "Making .so File Library",
+            "type": "shell",
+            "command" : "g++",
+            "args": [
+                "-shared", "-Wl--whole-archive", "-L./", "-lLibApi", "-Wl--nowhole-archive", "-o", "libDllApi.so", "DllApi.o"
+            ]
+        }
+    ]
+}
